@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head th:replace="fragments :: head(title= 'User Panel')"></head>
+  <body>
+    <h1>User Panel</h1>
+    <h2 th:text="|${#authentication.getName()}, you can change your data whenever you want:|">Editing message</h2>
+    <p th:if="${#request.getParameter('success')}" style="color: darkgreen">Your data has been changed!</p>
+    <form th:action="@{/user-panel}" method="post" th:object="${user}" class="loginForm" novalidate><!--validation turned off! -->
+      <div class="row g-3 mb-3">
+        <div class="col">
+          <label for="name" class="form-label">First name</label>
+          <input type="text" class="form-control" id="name" placeholder="First Name" th:field="*{firstName}" minlength="3" maxlength="50" required>
+          <p class="validation-info" th:errors="*{firstName}">First name errors</p>
+        </div>
+        <div class="col">
+          <label for="lastName" class="form-label">Last name</label>
+          <input type="text" class="form-control" placeholder="Last name" id="lastName" th:field="*{lastName}" minlength="3" maxlength="50" required>
+          <p class="validation-info" th:errors="*{lastName}">Last name errors</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="address" class="form-label">Street & number</label>
+        <input type="text" class="form-control" id="address" placeholder="Wiejska 32a/4" th:field="*{address}" minlength="5" maxlength="100" required>
+        <p class="validation-info" th:errors="*{address}">Address errors</p>
+
+      </div>
+      <div class="row mt-4">
+        <div class="col-2">
+          <label for="postalCode" class="form-label">Postal code</label>
+          <input type="text" class="form-control" id="postalCode" placeholder="12-345" th:field="*{postalCode}" minlength="6" maxlength="6" required>
+          <p class="validation-info" th:errors="*{postalCode}">Postal code errors</p>
+
+        </div>
+        <div class="col">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" id="city" placeholder="City" th:field="*{city}" minlength="2" maxlength="50" required>
+          <p class="validation-info" th:errors="*{City}">City errors</p>
+
+        </div>
+      </div>
+      <div class="mb-3 mt-4">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="email@example.com" th:field="*{email}" minlength="7" maxlength="80" required>
+        <p class="validation-info" th:errors="*{email}">Email errors</p>
+      </div>
+
+      <input type="hidden" class="form-control" th:field="*{username}">
+      <input type="hidden" class="form-control" th:field="*{password}">
+      <input type="hidden" th:field="*{id}">
+      <input type="hidden" th:field="*{termsAgreement}">
+      <button type="submit" class="btn btn-success">Confirm changes</button>
+    </form>
+    <div th:replace="fragments :: footer"></div>
+  </body>
+</html>

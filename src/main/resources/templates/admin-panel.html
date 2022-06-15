@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head th:replace="fragments :: head(title= 'Admin Panel')"></head>
+  <body>
+  <h1>Admin Panel</h1>
+  <h3 th:text="|Hi, ${#authentication.getName()}|">Welcome message</h3>
+  <div>
+    <h5>List of admins:</h5>
+    <ul th:each="admin : ${admins}" th:if="${admin.username ne #authentication.getName()}">
+      <li th:text="*{admin.username}"></li>
+      <a th:href="|@{/admin/degrade}/*{admin.id}|">Degrade</a>
+    </ul>
+    <h5>List of users:</h5>
+    <ul th:each="user : ${regularUsers}">
+      <li th:text="*{user.username}"></li>
+      <a th:href="|@{/admin/promote}/*{user.id}|">Promote</a>
+    </ul>
+  </div>
+  <div th:replace="fragments :: footer"></div>
+  </body>
+</html>

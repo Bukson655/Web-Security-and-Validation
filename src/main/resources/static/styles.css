@@ -1,0 +1,27 @@
+h1, h2, h3, h4, h5, p, ul {
+    text-align: center;
+}
+
+.validation-info {
+    color: red;
+    font-size: 0.7rem;
+}
+
+.content, .header, footer, .loginForm, .registerForm {
+    display: block;
+    text-align: center;
+    max-width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+
+footer {
+    padding-top: 100px;
+}
+
+.loginForm, .registerForm {
+    padding: 10px 100px 10px 100px;
+}
+
+ul, li {
+    list-style: none;
+}

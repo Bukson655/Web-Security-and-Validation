@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+  <head th:replace="fragments :: head(title= 'Main Page')"></head>
+  <body>
+    <div class="header">
+      <h1>Main Page</h1>
+      <h3 sec:authorize="isAuthenticated()" th:text="|Hi ${#authentication.getName()}|"></h3>
+      <h3 sec:authorize="!isAuthenticated()" th:text="|Hi Stranger, feel free to register|"></h3>
+      <div class="content">
+        <div th:if="${#authentication.name eq 'anonymousUser'}">
+          <a th:href="@{/register}"><button type="button" class="btn btn-dark">Register</button></a>
+        </div>
+        <div th:if="${#authentication.name ne 'anonymousUser'}">
+          <p>All available options are below </p>
+        </div>
+      </div>
+      <div th:replace="fragments :: footer"></div>
+    </div>
+  </body>
+</html>

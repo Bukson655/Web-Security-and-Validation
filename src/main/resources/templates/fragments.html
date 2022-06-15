@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:fragment="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title th:text="${title}">Mainpage</title>
+  </head>
+  <body>
+  <footer th:fragment="footer" class="footer">
+    <a th:href="@{/}"><button type="button" class="btn btn-dark">Main page</button></a>
+    <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><button type="button" class="btn btn-dark">Log in</button></a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><button type="button" class="btn btn-dark">Log out</button></a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/user-panel/}"><button type="button" class="btn btn-dark">User panel</button></a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/panel}"><button type="button" class="btn btn-dark">Admin panel</button></a>
+  </footer>
+  </body>
+</html>

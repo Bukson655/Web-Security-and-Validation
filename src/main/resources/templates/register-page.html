@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments :: head(title= 'Register Page')"></head>
+  <body>
+  <h1>Register Page</h1>
+  <form class="registerForm" th:action="@{/register}" method="post" th:object="${userDto}" novalidate> <!--validation turned off! -->
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" minlength="5" maxlength="50" required>
+        <p class="validation-info" th:if="${isUsernameTaken eq true}">Username already exists</p>
+        <p class="validation-info" th:errors="*{username}">Username errors</p>
+      </div>
+      <div class="col">
+        <label for="name" class="form-label">First name</label>
+        <input type="text" class="form-control" id="name" placeholder="First Name" th:field="*{firstName}" minlength="3" maxlength="50" required>
+        <p class="validation-info" th:errors="*{firstName}">First name errors</p>
+      </div>
+      <div class="col">
+        <label for="lastName" class="form-label">Last name</label>
+        <input type="text" class="form-control" placeholder="Last name" id="lastName" th:field="*{lastName}" minlength="3" maxlength="50" required>
+        <p class="validation-info" th:errors="*{lastName}">Last name errors</p>
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="address" class="form-label">Street & number</label>
+      <input type="text" class="form-control" id="address" placeholder="Wiejska 32a/4" th:field="*{address}" minlength="5" maxlength="100" required>
+      <p class="validation-info" th:errors="*{address}">Address errors</p>
+    </div>
+    <div class="row mt-4">
+      <div class="col-2">
+        <label for="postalCode" class="form-label">Postal code</label>
+        <input type="text" class="form-control" id="postalCode" placeholder="12-345" th:field="*{postalCode}" minlength="6" maxlength="6" required>
+        <p class="validation-info" th:errors="*{postalCode}">Postal code errors</p>
+
+      </div>
+      <div class="col">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" placeholder="City" th:field="*{city}" minlength="2" maxlength="50" required>
+        <p class="validation-info" th:errors="*{city}">City errors</p>
+
+      </div>
+    </div>
+    <div class="mb-3 mt-4">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="email@example.com" th:field="*{email}" minlength="7" maxlength="80" required>
+      <div id="emailHelp" class="form-text">We do not share your email and data.</div>
+      <p class="validation-info" th:errors="*{email}">Email errors</p>
+
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" th:field="*{password}" minlength="8" maxlength="20" required>
+      <p class="validation-info" th:errors="*{password}">Password errors</p>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="termsAgreement" th:field="*{termsAgreement}" required>
+      <label class="form-check-label" for="termsAgreement">I do agree and I do accept <a href="#">terms</a></label>
+      <p class="validation-info" th:errors="*{termsAgreement}">Terms agreement errors</p>
+
+    </div>
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+    <div th:replace="fragments :: footer"></div>
+  </body>
+</html>
